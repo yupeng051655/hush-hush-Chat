@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "948852240965",
+    "firebase_url": "https://hushhushchat-ed680.firebaseio.com",
+    "project_id": "hushhushchat-ed680",
+    "storage_bucket": "hushhushchat-ed680.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:948852240965:android:c1377a2209964e3e3fa92c",
+        "android_client_info": {
+          "package_name": "com.example.hushhushchat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "948852240965-2n88lblq3m0llcs6e4638gfnonpl107h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.hushhushchat",
+            "certificate_hash": "d117059b730530f49f7e289545bb3f843a13b3c9"
+          }
+        },
+        {
+          "client_id": "948852240965-7qpc9nijtf589i590i0788lk0kq5ioso.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC79SFyBM3UPGXnAHInL9sfSWPwvr4pxXI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "948852240965-7qpc9nijtf589i590i0788lk0kq5ioso.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
