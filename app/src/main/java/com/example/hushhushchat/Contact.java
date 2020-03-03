@@ -1,6 +1,7 @@
 package com.example.hushhushchat;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -9,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -55,6 +57,16 @@ public class Contact extends Fragment {
 
         retrieveAndDisplayContact();
 
+        list_view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String currentContactName = parent.getItemAtPosition(position).toString();
+                Intent contactChatIntent = new Intent(getContext(), contactChatActivity.class);
+                contactChatIntent.putExtra("contactName", currentContactName);
+                startActivity(contactChatIntent);
+            }
+        });
+
 
 
         return contactView;
@@ -78,6 +90,7 @@ public class Contact extends Fragment {
 
                 while(iterator.hasNext()){
                     set.add(((DataSnapshot)iterator.next()).child("name").getValue().toString());
+
 
                 }
                 list_of_contact.clear();

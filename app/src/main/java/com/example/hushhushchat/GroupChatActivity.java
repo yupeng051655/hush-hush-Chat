@@ -63,6 +63,7 @@ public class GroupChatActivity extends AppCompatActivity {
 
         getUserInfo();
 
+
         sendMessageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -112,7 +113,6 @@ public class GroupChatActivity extends AppCompatActivity {
             }
         });
 
-
     }
 
     private void InitializeField(){
@@ -133,7 +133,6 @@ public class GroupChatActivity extends AppCompatActivity {
     private void getUserInfo(){
         /*
         connect to firebase and get user information
-
          */
         usersRef.child(currentUserID).addValueEventListener(new ValueEventListener() {
             @Override
