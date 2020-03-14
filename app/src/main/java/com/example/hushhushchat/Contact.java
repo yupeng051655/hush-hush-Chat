@@ -67,8 +67,6 @@ public class Contact extends Fragment {
             }
         });
 
-
-
         return contactView;
 
     }
@@ -104,6 +102,5 @@ public class Contact extends Fragment {
             }
         });
     }
-
 
 }

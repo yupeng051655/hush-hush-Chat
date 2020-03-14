@@ -96,7 +96,8 @@ public class MainActivity extends AppCompatActivity {
             sendUserToSettingActivity();
         }
         if(item.getItemId() == R.id.create_group_option){
-            requestNewGroup();
+            //requestNewGroup();
+            sendUserToGroupSettingActivity();
         }
         if(item.getItemId() == R.id.find_friends_option){
             sendUserToFindFriendActivity();
@@ -144,6 +145,11 @@ public class MainActivity extends AppCompatActivity {
         Intent settingsIntent = new Intent (MainActivity.this, SettingsActivity.class);
         startActivity(settingsIntent);
 
+    }
+
+    private void sendUserToGroupSettingActivity() {
+        Intent groupSettingIntent = new Intent (MainActivity.this, CreateGroupActivity.class);
+        startActivity(groupSettingIntent);
     }
 
     private void createNewGroup(String groupName){

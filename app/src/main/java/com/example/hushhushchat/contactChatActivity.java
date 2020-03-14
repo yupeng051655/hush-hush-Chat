@@ -67,14 +67,12 @@ public class contactChatActivity extends AppCompatActivity {
 
         sendMessageButton = (ImageButton) findViewById(R.id.contact_send_message_button);
         userMessage = (EditText) findViewById(R.id.input_contact_message);
-        //displayMessage = (TextView) findViewById(R.id.contact_text_view_display);
-        //displayBlank = (TextView) findViewById(R.id.contact_blank_view_display);
-        //mScrollView = (ScrollView) findViewById(R.id.contact_srcoll_view);
 
         getContactInfo();
-        getUserInfo();
+       // getUserInfo();
         getContactSpace();
 
+        /*
 
         sendMessageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,11 +84,15 @@ public class contactChatActivity extends AppCompatActivity {
             }
         });
 
+         */
+
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+
+
         FirebaseDatabase.getInstance().getReference().child("Contact")
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -103,7 +105,8 @@ public class contactChatActivity extends AppCompatActivity {
                                 @Override
                                 public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                                     if(dataSnapshot.exists()){
-                                        displayMsg(dataSnapshot);
+                                        //displayMsg(dataSnapshot);
+
 
                                     }
 
@@ -112,10 +115,9 @@ public class contactChatActivity extends AppCompatActivity {
                                 @Override
                                 public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                                     if(dataSnapshot.exists()){
-                                        displayMsg(dataSnapshot);
+                                       //displayMsg(dataSnapshot);
 
                                     }
-
 
                                 }
 
@@ -143,7 +145,7 @@ public class contactChatActivity extends AppCompatActivity {
                                 @Override
                                 public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                                     if(dataSnapshot.exists()){
-                                        displayMsg(dataSnapshot);
+                                        //displayMsg(dataSnapshot);
 
                                     }
 
@@ -152,10 +154,9 @@ public class contactChatActivity extends AppCompatActivity {
                                 @Override
                                 public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                                     if(dataSnapshot.exists()){
-                                        displayMsg(dataSnapshot);
+                                        //displayMsg(dataSnapshot);
 
                                     }
-
 
                                 }
 
@@ -184,6 +185,7 @@ public class contactChatActivity extends AppCompatActivity {
                     }
                 });
 
+
     }
 
 
@@ -193,7 +195,7 @@ public class contactChatActivity extends AppCompatActivity {
         usersRef.child(currentUserID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()){
+                if(dataSnapshot.exists() && dataSnapshot.hasChild("name")){
                     currentUserName = dataSnapshot.child("name").getValue().toString();
 
                 }
@@ -258,7 +260,6 @@ public class contactChatActivity extends AppCompatActivity {
         linearLayoutManager = new LinearLayoutManager(this);
         userMsgList.setLayoutManager(linearLayoutManager);
         userMsgList.setAdapter(messageAdapter);
-
 
     }
 
@@ -332,6 +333,8 @@ public class contactChatActivity extends AppCompatActivity {
 
             HashMap<String, Object> messageInfoMap = new HashMap<>();
 
+            currentUserName = "dddddddwee";
+            messageInfoMap.put("userID", currentUserID);
             messageInfoMap.put("name", currentUserName);
             messageInfoMap.put("message", message);
             messageInfoMap.put("date", currentDate);
@@ -341,34 +344,6 @@ public class contactChatActivity extends AppCompatActivity {
         }
 
     }
-
-
-    private void displayMsg(DataSnapshot dataSnapshot){
-
-        Iterator iterator = dataSnapshot.getChildren().iterator();
-
-        while(iterator.hasNext()){
-
-            String chatDate = (String) ((DataSnapshot)iterator.next()).getValue();
-            String chatMsg = (String) ((DataSnapshot)iterator.next()).getValue();
-            String chatName = (String) ((DataSnapshot)iterator.next()).getValue();
-            String chatTime = (String) ((DataSnapshot)iterator.next()).getValue();
-
-            //Messages messages = dataSnapshot.getValue(Messages.class);
-            Messages messages = new Messages(chatDate, chatMsg, chatName, chatTime);
-            messagesList.add(messages);
-            messageAdapter.notifyDataSetChanged();
-
-            //displayMessage.append(chatName + ":\n" + chatMsg + "\n" + chatTime + " " + chatDate + "\n");
-
-        }
-
-
-    }
-
-
-
-
 
 
 

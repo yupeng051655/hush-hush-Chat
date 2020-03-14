@@ -3,10 +3,10 @@ package com.example.hushhushchat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.view.ViewGroupCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -35,11 +35,14 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
     public class MessageViewHolder extends RecyclerView.ViewHolder {
 
         public TextView senderMsgText, receiverMsgText;
+        public ImageView receiveMsgImage, senderMsgImage;
 
 
         public MessageViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            senderMsgImage = (ImageView) itemView.findViewById(R.id.sender_profile_image);
+            receiveMsgImage = (ImageView) itemView.findViewById(R.id.receiver_profile_image);
             senderMsgText = (TextView) itemView.findViewById(R.id.sender_msg_text);
             receiverMsgText = (TextView) itemView.findViewById(R.id.receiver_msg_text);
         }
@@ -66,30 +69,27 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
         Messages messages = userMessageList.get(position);
 
         getUserInfo();
+        //String fromUserName = messages.getName();
 
         String fromUserName = messages.getName();
 
 
         if(fromUserName.equals(msgSendName)){
+            holder.senderMsgImage.setVisibility(View.VISIBLE);
+            holder.receiveMsgImage.setVisibility(View.INVISIBLE);
             holder.senderMsgText.setVisibility(View.VISIBLE);
             holder.receiverMsgText.setVisibility(View.INVISIBLE);
             holder.senderMsgText.setBackgroundResource(R.drawable.sender_msg_layout);
             holder.senderMsgText.setText(messages.getMsg());
         }
         else{
+            holder.senderMsgImage.setVisibility(View.INVISIBLE);
+            holder.receiveMsgImage.setVisibility(View.VISIBLE);
             holder.senderMsgText.setVisibility(View.INVISIBLE);
             holder.receiverMsgText.setVisibility(View.VISIBLE);
-
             holder.receiverMsgText.setBackgroundResource(R.drawable.receiver_msg_layout);
             holder.receiverMsgText.setText(messages.getMsg());
-
         }
-        /*
-        holder.receiverMsgText.setVisibility(View.VISIBLE);
-        holder.receiverMsgText.setBackgroundResource(R.drawable.receiver_msg_layout);
-        holder.receiverMsgText.setText(messages.getMsg());
-*/
-
 
 
     }

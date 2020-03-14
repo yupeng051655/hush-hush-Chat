@@ -36,8 +36,6 @@ public class findFriendActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_friend);
 
-       // friendRecucleList = (RecyclerView) findViewById(R.id.find_friends_recycler_list);
-       // friendRecucleList.setLayoutManager(new LinearLayoutManager(this));
 
         mToolbar = (Toolbar) findViewById(R.id.find_friend_toolbar);
         setSupportActionBar(mToolbar);

@@ -11,15 +11,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".contactChatActivity"
-            android:parentActivityName=".MainActivity"></activity>
+        <activity android:name=".CreateGroupActivity"></activity>
+        <activity
+            android:name=".contactChatActivity"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".findFriendActivity"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".GroupChatActivity"
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".SettingsActivity" />
+        <activity
+            android:name=".SettingsActivity"
+            android:parentActivityName=".MainActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".MainActivity">

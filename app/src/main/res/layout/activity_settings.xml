@@ -6,45 +6,57 @@
     android:layout_height="match_parent"
     tools:context=".SettingsActivity">
 
+    <include
+        android:id="@+id/setting_bar_layout"
+        layout="@layout/app_bar_layout"
+        >
+    </include>
 
-    <ImageView
-        android:id="@+id/settings_profile_image"
-        android:layout_width="match_parent"
-        android:layout_height="281dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="17dp"
-        android:scaleType="fitXY"
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profile_image"
         android:src="@drawable/cat"
-        android:textAlignment="center" />
+        android:layout_width="250dp"
+        android:layout_marginTop="35dp"
+        android:layout_height="250dp"
+        app:civ_border_width="1dp"
+        app:civ_border_color="@color/colorPrimary"
+        android:layout_below="@+id/setting_bar_layout"
+        android:layout_centerInParent="true"/>
+
+
 
     <EditText
         android:id="@+id/settings_user_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/settings_user_name"
+        android:layout_below="@id/profile_image"
         android:inputType="textImeMultiLine"
         android:hint="description"
         android:textAlignment="center"
+        android:background="@drawable/inputs"
         android:textStyle="normal"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
+        android:layout_centerInParent="true"
         android:padding="10dp"
+        android:layout_marginTop="12dp"
         />
 
     <EditText
         android:id="@+id/settings_user_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/settings_profile_image"
+        android:layout_below="@id/settings_user_description"
         android:inputType="textImeMultiLine"
         android:hint="username"
         android:textAlignment="center"
+        android:background="@drawable/inputs"
         android:textStyle="normal"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
+        android:layout_centerInParent="true"
         android:padding="10dp"
+        android:layout_marginTop="12dp"
 
         />
 
@@ -52,9 +64,10 @@
         android:id="@+id/settings_update_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/settings_user_description"
-        android:layout_marginTop="11dp"
+        android:layout_below="@id/settings_user_name"
+        android:layout_marginTop="12dp"
         android:layout_marginStart="20dp"
+        android:layout_centerInParent="true"
         android:background="@drawable/buttons"
         android:text="Update"
         android:textAlignment="center"

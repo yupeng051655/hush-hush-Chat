@@ -5,6 +5,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.appcompat.widget.ToolbarWidgetWrapper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -25,9 +27,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 
 
 public class GroupChatActivity extends AppCompatActivity {
@@ -48,6 +52,11 @@ public class GroupChatActivity extends AppCompatActivity {
     private String currentUserID, currentUserName;
     private String currentDate, currentTime;
 
+    private final List<Messages> messagesList = new ArrayList<>();
+    private LinearLayoutManager linearLayoutManager;
+    private MessageAdapter messageAdapter;
+    private RecyclerView userMsgList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,7 +69,6 @@ public class GroupChatActivity extends AppCompatActivity {
         groupRef = FirebaseDatabase.getInstance().getReference().child("Group").child(currentGroupName);
 
         InitializeField();
-
         getUserInfo();
 
 
@@ -79,11 +87,9 @@ public class GroupChatActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-
         groupRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
                 if(dataSnapshot.exists()){
                     displayMsg(dataSnapshot);
                 }
@@ -126,6 +132,12 @@ public class GroupChatActivity extends AppCompatActivity {
         userMessage = (EditText) findViewById(R.id.input_group_message);
         displayMessage = (TextView) findViewById(R.id.group_text_view_display);
         mScrollView = (ScrollView) findViewById(R.id.group_srcoll_view);
+
+        messageAdapter = new MessageAdapter(messagesList);
+        userMsgList = (RecyclerView)findViewById(R.id.group_msg_recyclerView);
+        linearLayoutManager = new LinearLayoutManager(this);
+        userMsgList.setLayoutManager(linearLayoutManager);
+        userMsgList.setAdapter(messageAdapter);
 
 
     }
@@ -193,8 +205,10 @@ public class GroupChatActivity extends AppCompatActivity {
             String chatName = (String) ((DataSnapshot)iterator.next()).getValue();
             String chatTime = (String) ((DataSnapshot)iterator.next()).getValue();
 
-            displayMessage.append(chatName + ":\n" + chatMsg + "\n" + chatTime + " " + chatDate + "\n\n\n");
-
+            //displayMessage.append(chatName + ":\n" + chatMsg + "\n" + chatTime + " " + chatDate + "\n\n\n");
+            Messages messages = new Messages(chatDate, chatMsg, chatName, chatTime);
+            messagesList.add(messages);
+            messageAdapter.notifyDataSetChanged();
         }
 
     }
